@@ -7,6 +7,7 @@
   <script src="/Content/Scripts/backbone.min.js"></script>
   <script src="/Content/Scripts/ShortUrl/index.js"></script>
   <script src="/Content/Scripts/ShortUrl/mainForm.js"></script>
+  <script src="/Content/Scripts/ShortUrl/urlList.js"></script>
   <script>
     $(function () {
       ShortUrl.init();
@@ -14,7 +15,12 @@
   </script>
 </head>
   <body>
-    <div id="mainForm" class="span12" />
+    <div class="row">
+      <div id="mainForm" class="span12" />
+    </div>
 
+    <div class="row">
+      <div id="listOfShortenedUrls"></div>
+    </div>
   </body>
 </html>

@@ -78,6 +78,7 @@
     <Content Include="Content\Scripts\jquery-1.7.2.min.js" />
     <Content Include="Content\Scripts\ShortUrl\index.js" />
     <Content Include="Content\Scripts\ShortUrl\mainForm.js" />
+    <Content Include="Content\Scripts\ShortUrl\urlList.js" />
     <Content Include="Content\Scripts\underscore.js" />
     <Content Include="Content\Scripts\underscore.min.js" />
     <Content Include="Views\Index.html" />
