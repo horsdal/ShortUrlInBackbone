@@ -1,10 +1,10 @@
 ﻿ShortUrl.MainFormView = Backbone.View.extend({
   render : function() {
-    $(this.el).html("<form><input type=\"text\" /><input type=\"submit\"/> </form>");
+    $(this.el).html("<div class=\"input-append\"><input type=\"text\" value=\"Long URL\" class=\"span2\" /><button class=\"btn\">Shorten!</button> </div>");
     return this;
   },
   events: {
-    "submit form" : "sayHello"
+    "click button" : "sayHello"
   },
   sayHello : function() {
     alert("hej");

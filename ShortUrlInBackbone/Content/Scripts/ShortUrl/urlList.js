@@ -1,15 +1,16 @@
 ﻿ShortUrl.ShortUrlItemView = Backbone.View.extend({
-  tagName : "li",
+  tagName : "tr",
   
   render : function() {
-    $(this.el).html("ShortUrl -> LongUrl");
+    $(this.el).html("<td>ShortUrl</td><td> -> </td><td>LongUrl</td>");
     return this;
   }
 });
 
 ShortUrl.ShortUrlListView = Backbone.View.extend({
-  tagName: "ul",
-  
+  tagName : "table",
+  className: "table table-striped",
+
   render: function () {
     var elms = [];
     for (var i = 0; i < 10; i++) {
