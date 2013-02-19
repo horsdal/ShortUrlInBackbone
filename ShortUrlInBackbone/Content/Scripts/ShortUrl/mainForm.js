@@ -17,7 +17,9 @@
   
   add: function () {
     var newItem = new ShortUrl.ShortenedUrlModel({ longUrl: this.longUrl.val() });
-    if (newItem.isValid())
+    if (newItem.isValid()) {
       this.options.urlColl.add(newItem);
+      newItem.save();
+    }
   }
 });

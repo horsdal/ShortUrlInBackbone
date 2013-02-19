@@ -1,5 +1,7 @@
 ﻿ShortUrl.ShortenedUrlModel = Backbone.Model.extend({
-  url: "/shortenedUrls",
+  url: function() {
+    return "/shortenedUrls/" + (_.isUndefined(this.id) ? "" : this.id);
+  },
 
   initialize: function () {
     this.set({ shortUrl: new Date().getTime() % 10000 });

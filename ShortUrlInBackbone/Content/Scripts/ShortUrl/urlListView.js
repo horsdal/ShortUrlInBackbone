@@ -25,8 +25,10 @@
   },
   
   remove: function() {
-    this.model.destroy();
-    ShortUrl.urlCollection.remove(this.model);
+    this.model.destroy({
+      success: function () { ShortUrl.urlCollection.remove(this.model); },
+      error: function () { console.log("delete failed"); }
+    });
   }
 });
 
