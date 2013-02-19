@@ -14,7 +14,7 @@
   
   <script id="mainFormTemplate" type="text/underscore">
     <div class="input-append">
-      <input id="longUrlTextInput" type="text" placeholder="Long URL" class="span4" />
+      <input id="longUrlTextInput" type="text" placeholder="Long URL" class="span5" />
       <button class="btn">Shorten!</button>
      </div>
   </script>
@@ -22,7 +22,7 @@
   <script id="urlListItemTemplate" type="text/underscore">
     <td><%=shortUrl%></td>
     <td><%=longUrl%></td>
-    <td><button class="btn-info">Go there!</button></td>
+    <td><button class="btn-primary">Go there!</button></td>
     <td><button class="btn-danger">Delete</button></td>
   </script>
 
@@ -34,11 +34,12 @@
 </head>
   <body>
     <div class="container">
-      <h1>URL shortener</h1>
-      <div id="mainForm" class="span12"></div>
+      <div class="hero-unit">
+        <h1>URL shortener</h1>
 
-      <h2>All shortened URLs</h2>
-      <div id="listOfShortenedUrls" class="span12"/>
+      </div>
+      <div id="mainForm" class="span12"></div>
+      <div id="listOfShortenedUrls" class="span12"></div>
     </div>
   </body>
 </html>
