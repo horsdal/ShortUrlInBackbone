@@ -14,12 +14,6 @@
 });
 
 ShortUrl.ShortenedUrlsCollection = Backbone.Collection.extend({
-  initialize: function () {
-    this.add({ shortUrl: "short.ly/1", longUrl: "www.longurlplease.com" });
-    this.add({ shortUrl: "short.ly/2", longUrl: "www.longurlplease.com" });
-    this.add({ shortUrl: "short.ly/3", longUrl: "www.longurlplease.com" });
-  },
-
   url: "/shortenedUrls",
   model: ShortUrl.ShortenedUrlModel
 });
