@@ -30,8 +30,11 @@ ShortUrl.ShortUrlItemView = Backbone.View.extend({
     "click button" : "go"
   },
   
-  go : function() { 
-     window.open("http://www.longurlplease.com", "_blank");
+  go : function() {
+    var longUrl = this.model.get("longUrl");
+    if (new URI(longUrl).scheme === null) 
+      longUrl = "http://" + longUrl;
+    window.open(longUrl, "_blank");
   }
 });
 
