@@ -1,5 +1,6 @@
 ﻿namespace ShortUrlInBackbone
 {
+  using System;
   using System.Collections.Generic;
   using System.Linq;
   using Nancy;
@@ -19,6 +20,16 @@
     {
       Get["/"] = _ => View["Index"];
       Get["/shortenedUrls"] = _ => shortenedUrls;
+      Get["/{shortUrlCode}"] = param =>
+        {
+          var destination = shortenedUrls.FirstOrDefault(url => url.shortUrl == param.shortUrlCode);
+          if (destination == null)
+            return HttpStatusCode.NotFound;
+          if (Uri.IsWellFormedUriString(destination.longUrl, UriKind.Absolute))
+            return Response.AsRedirect(destination.longUrl);
+
+          return Response.AsRedirect("http://" + destination.longUrl);
+        };
 
       Post["/shortenedUrls"] = _ =>
         {
