@@ -1,4 +1,18 @@
-﻿ShortUrl.ShortUrlItemView = Backbone.View.extend({
+﻿ShortUrl.ShortenedUrlModel = Backbone.Model.extend({
+
+});
+
+ShortUrl.ShortenedUrlsCollection = Backbone.Collection.extend({
+  initialize : function() {
+    this.add({shortUrl : "short.ly/1", longUrl : "www.longurlplease.com" });
+    this.add({shortUrl : "short.ly/2", longUrl : "www.longurlplease.com" });
+    this.add({shortUrl : "short.ly/3", longUrl : "www.longurlplease.com" });
+  },
+
+  model: ShortUrl.ShortenedUrlModel
+});
+
+ShortUrl.ShortUrlItemView = Backbone.View.extend({
   tagName : "tr",
   
   initialize: function () {
@@ -7,7 +21,7 @@
 
   render: function () {
     var template = $("#urlListItemTemplate").html();
-    var row = _.template(template, { shortUrl: "short.ly/deadbeef", longUrl: "www.longurlplease.com" });
+    var row = _.template(template, this.model.toJSON());
     $(this.el).html(row);
     return this;
   },
@@ -31,9 +45,9 @@ ShortUrl.ShortUrlListView = Backbone.View.extend({
 
   render: function () {
     var elms = [];
-    for (var i = 0; i < 10; i++) {
-      elms.push((new ShortUrl.ShortUrlItemView()).el);
-    }
+    this.collection.each(function (model) {
+      elms.push((new ShortUrl.ShortUrlItemView({model: model})).el);
+    });
     $(this.el).html(elms);
     return this;
   }
