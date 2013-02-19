@@ -16,7 +16,7 @@
   },
   
   sayHello: function () {
-    var newItem = new ShortUrl.ShortenedUrlModel({ shortUrl: "new", longUrl: this.longUrl.val() })
+    var newItem = new ShortUrl.ShortenedUrlModel({ shortUrl: new Date().getTime() % 10000, longUrl: this.longUrl.val() })
     if (newItem.isValid())
       this.options.urlColl.add(newItem);
   }
