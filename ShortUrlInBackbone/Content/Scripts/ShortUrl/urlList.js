@@ -1,8 +1,10 @@
 ﻿ShortUrl.ShortUrlItemView = Backbone.View.extend({
   tagName : "tr",
   
-  render : function() {
-    $(this.el).html("<td>ShortUrl</td><td> -> </td><td>LongUrl</td>");
+  render: function () {
+    var template = $("#urlListItemTemplate").html();
+    var row = _.template(template, { shortUrl: "short.ly/deadbeef", longUrl: "www.longurlplease.com" });
+    $(this.el).html(row);
     return this;
   }
 });
