@@ -14,6 +14,6 @@
   },
   
   sayHello : function() {
-    alert("hej");
+    this.options.urlColl.add({ shortUrl: "new", longUrl: "www.facebook.com" });
   }
 });
