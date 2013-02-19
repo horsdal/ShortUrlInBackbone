@@ -1,28 +1,4 @@
-﻿ShortUrl.ShortenedUrlModel = Backbone.Model.extend({
-  url: "/shortenedUrls",
-  
-  initialize: function() {
-    this.set({ shortUrl: new Date().getTime() % 10000 });
-  },
-  
-  validate : function(attrs) {
-    if (_.isEmpty(attrs.longUrl))
-      return "Needs a long url";
-  }
-});
-
-ShortUrl.ShortenedUrlsCollection = Backbone.Collection.extend({
-  initialize : function() {
-    this.add({shortUrl : "short.ly/1", longUrl : "www.longurlplease.com" });
-    this.add({shortUrl : "short.ly/2", longUrl : "www.longurlplease.com" });
-    this.add({shortUrl : "short.ly/3", longUrl : "www.longurlplease.com" });
-  },
-
-  url: "/shortenedUrls",
-  model: ShortUrl.ShortenedUrlModel
-});
-
-ShortUrl.ShortUrlItemView = Backbone.View.extend({
+﻿ShortUrl.ShortUrlItemView = Backbone.View.extend({
   tagName : "tr",
   
   initialize: function () {
@@ -32,13 +8,13 @@ ShortUrl.ShortUrlItemView = Backbone.View.extend({
   render: function () {
     var template = $("#urlListItemTemplate").html();
     var row = _.template(template, this.model.toJSON());
-    $(this.el).html(row);
+    this.$el.html(row);
     return this;
   },
   
   events: {
-    "click button.btn-info": "go",
-    "click button.btn-danger": "delete"
+    "click button.btn-primary": "go",
+    "click button.btn-danger": "remove"
   },
   
   go : function() {
@@ -48,11 +24,12 @@ ShortUrl.ShortUrlItemView = Backbone.View.extend({
     window.open(longUrl, "_blank");
   },
   
-  delete: function() {
+  remove: function() {
     this.model.destroy();
     ShortUrl.urlCollection.remove(this.model);
   }
 });
+
 
 ShortUrl.ShortUrlListView = Backbone.View.extend({
   tagName : "table",
@@ -70,7 +47,7 @@ ShortUrl.ShortUrlListView = Backbone.View.extend({
     this.collection.each(function (model) {
       elms.push((new ShortUrl.ShortUrlItemView({model: model})).el);
     });
-    $(this.el).html(elms);
+    this.$el.html(elms);
     return this;
   }
 })

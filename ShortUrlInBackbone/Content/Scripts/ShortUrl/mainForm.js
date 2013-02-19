@@ -7,7 +7,7 @@
   
   render: function () {
     var template = $("#mainFormTemplate").html();
-    $(this.el).html(template);
+    this.$el.html(template);
     return this;
   },
   
