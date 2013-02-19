@@ -4,7 +4,8 @@
   },
 
   initialize: function () {
-    this.set({ shortUrl: new Date().getTime() % 10000 });
+    if (this.isNew())
+      this.set({ shortUrl: new Date().getTime() % 10000 });
   },
 
   validate: function (attrs) {
