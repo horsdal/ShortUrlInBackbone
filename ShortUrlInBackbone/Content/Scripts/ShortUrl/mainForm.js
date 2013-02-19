@@ -1,6 +1,8 @@
 ﻿ShortUrl.MainFormView = Backbone.View.extend({
   initialize: function() {
     this.render();
+    
+    this.longUrl = $("#longUrlTextInput");
   },
   
   render: function () {
@@ -14,6 +16,6 @@
   },
   
   sayHello : function() {
-    this.options.urlColl.add({ shortUrl: "new", longUrl: "www.facebook.com" });
+    this.options.urlColl.add({ shortUrl: "new", longUrl: this.longUrl.val() });
   }
 });
