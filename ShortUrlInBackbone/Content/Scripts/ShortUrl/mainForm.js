@@ -2,7 +2,7 @@
   initialize: function() {
     this.render();
     
-    this.longUrl = $("#longUrlTextInput");
+    this.longUrl = this.$("#longUrlTextInput");
   },
   
   render: function () {
@@ -12,11 +12,11 @@
   },
   
   events: {
-    "click button" : "sayHello"
+    "click button" : "add"
   },
   
-  sayHello: function () {
-    var newItem = new ShortUrl.ShortenedUrlModel({ shortUrl: new Date().getTime() % 10000, longUrl: this.longUrl.val() })
+  add: function () {
+    var newItem = new ShortUrl.ShortenedUrlModel({ longUrl: this.longUrl.val() });
     if (newItem.isValid())
       this.options.urlColl.add(newItem);
   }
