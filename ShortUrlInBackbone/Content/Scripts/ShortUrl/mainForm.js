@@ -18,8 +18,10 @@
   add: function () {
     var newItem = new ShortUrl.ShortenedUrlModel({ longUrl: this.longUrl.val() });
     if (newItem.isValid()) {
-      this.options.urlColl.add(newItem);
-      newItem.save();
+      newItem.save({}, {
+        success: function(model) { ShortUrl.urlCollection.add(model); },
+        error: function () { console.log("save failed"); }
+      });
     }
   }
 });

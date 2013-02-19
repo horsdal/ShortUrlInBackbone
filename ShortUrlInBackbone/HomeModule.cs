@@ -25,7 +25,7 @@
           var item = this.Bind<ShortenedUrl>();
           item.id = shortenedUrls.Count();
           shortenedUrls.Add(item);
-          return HttpStatusCode.Created;
+          return Negotiate.WithModel(item).WithStatusCode(HttpStatusCode.Created);
         };
 
       Delete["/shortenedUrls/{id}"] = param =>
