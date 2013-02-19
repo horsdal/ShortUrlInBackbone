@@ -6,6 +6,14 @@
     var row = _.template(template, { shortUrl: "short.ly/deadbeef", longUrl: "www.longurlplease.com" });
     $(this.el).html(row);
     return this;
+  },
+  
+  events: {
+    "click button" : "go"
+  },
+  
+  go : function() { 
+     window.open("http://www.longurlplease.com", "_blank");
   }
 });
 
