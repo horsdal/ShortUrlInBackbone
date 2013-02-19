@@ -1,5 +1,10 @@
 ﻿ShortUrl.ShortenedUrlModel = Backbone.Model.extend({
-
+  url: "/shortenedUrls",
+  
+  validate : function(attrs) {
+    if (_.isEmpty(attrs.longUrl))
+      return "Needs a long url";
+  }
 });
 
 ShortUrl.ShortenedUrlsCollection = Backbone.Collection.extend({
@@ -9,6 +14,7 @@ ShortUrl.ShortenedUrlsCollection = Backbone.Collection.extend({
     this.add({shortUrl : "short.ly/3", longUrl : "www.longurlplease.com" });
   },
 
+  url: "/shortenedUrls",
   model: ShortUrl.ShortenedUrlModel
 });
 
@@ -27,7 +33,8 @@ ShortUrl.ShortUrlItemView = Backbone.View.extend({
   },
   
   events: {
-    "click button" : "go"
+    "click button.btn-info": "go",
+    "click button.btn-danger": "delete"
   },
   
   go : function() {
@@ -35,6 +42,11 @@ ShortUrl.ShortUrlItemView = Backbone.View.extend({
     if (new URI(longUrl).scheme === null) 
       longUrl = "http://" + longUrl;
     window.open(longUrl, "_blank");
+  },
+  
+  delete: function() {
+    this.model.destroy();
+    ShortUrl.urlCollection.remove(this.model);
   }
 });
 

@@ -15,7 +15,9 @@
     "click button" : "sayHello"
   },
   
-  sayHello : function() {
-    this.options.urlColl.add({ shortUrl: "new", longUrl: this.longUrl.val() });
+  sayHello: function () {
+    var newItem = new ShortUrl.ShortenedUrlModel({ shortUrl: "new", longUrl: this.longUrl.val() })
+    if (newItem.isValid())
+      this.options.urlColl.add(newItem);
   }
 });

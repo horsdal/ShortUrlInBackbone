@@ -1,10 +1,10 @@
 ﻿ShortUrl = {
   init: function() {
-    var urlColl = new ShortUrl.ShortenedUrlsCollection();
+    ShortUrl.urlCollection = new ShortUrl.ShortenedUrlsCollection();
 
-    var mainForm = new ShortUrl.MainFormView({ el: "#mainForm", urlColl: urlColl });
+    var mainForm = new ShortUrl.MainFormView({ el: "#mainForm", urlColl: ShortUrl.urlCollection });
 
-    var listOfUrls = new ShortUrl.ShortUrlListView({ collection: urlColl });
+    var listOfUrls = new ShortUrl.ShortUrlListView({ collection: ShortUrl.urlCollection });
     $("#listOfShortenedUrls").html(listOfUrls.el);
   }
 }
