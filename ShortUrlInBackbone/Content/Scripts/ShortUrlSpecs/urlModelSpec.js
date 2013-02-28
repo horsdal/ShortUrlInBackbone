@@ -26,11 +26,12 @@
     var cnt = 0;
 
     beforeEach(function () {
+      flag = false;
       urlModel = new ShortUrl.ShortenedUrlModel({ longUrl: "www.longurlplease.com" + cnt++ });
       expectedShortUrl = urlModel.get("shortUrl");
       urlModel.save({}, { success: function (model) { flag = true; savedModel = model; } });
     });
-
+    
     it("should not change the short url", function () {
       waitsFor(function () { return flag; }, "Server didn't succceed in saving model", 500);
       runs(function() {
