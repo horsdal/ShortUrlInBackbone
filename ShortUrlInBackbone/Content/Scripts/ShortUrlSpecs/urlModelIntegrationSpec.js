@@ -64,16 +64,21 @@
   
   describe("when saving fails", function () {
     var urlModel, savedModel;
-    var expectedShortUrl;    
+    var expectedShortUrl;
+    var server;
 
     beforeEach(function () {
       urlModel = new ShortUrl.ShortenedUrlModel({ longUrl: exprectedLongUrl});
       expectedShortUrl = urlModel.get("shortUrl");
 
-      var server = sinon.fakeServer.create();
+      server = sinon.fakeServer.create();
       server.respondWith("GET", urlModel.url(), [404, {}, ""]);
       
       urlModel.save({}, { success: function (model) { savedModel = model; } });
+    });
+    
+    afterEach(function () {
+      server.restore();
     });
     
     it("should still be new", function () {
