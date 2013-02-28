@@ -19,6 +19,10 @@
     it("should be new according to backbone", function () {
       expect(urlModel.isNew()).toBeTruthy();
     });
+    
+    it("should have 'shortenedUrls' a its url", function () {
+      expect(urlModel.url()).toEqual("/shortenedUrls/");
+    });
   });
   
   describe("when saved", function () {
@@ -47,10 +51,15 @@
 
     it("should not be new according to backbone", function () {
       waitsFor(function () { return flag; }, "Server didn't succceed in saving model", 500);
-      runs(function() {
+      runs(function () {
         expect(savedModel.isNew()).toBeFalsy();
       });
     });
+
+    it("should have include the id in its url", function () {
+      expect(savedModel.url()).toEqual("/shortenedUrls/" + savedModel.id);
+    });
+
   });
   
   describe("when saving fails", function () {

@@ -11,7 +11,7 @@
   validate: function (attrs) {
     if (_.isEmpty(attrs.longUrl))
       return "Needs a long url";
-  }
+  },
 });
 
 ShortUrl.ShortenedUrlsCollection = Backbone.Collection.extend({
