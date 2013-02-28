@@ -16,6 +16,9 @@
 
 ShortUrl.ShortenedUrlsCollection = Backbone.Collection.extend({
   url: "/shortenedUrls",
-  model: ShortUrl.ShortenedUrlModel
+  model: ShortUrl.ShortenedUrlModel,
+  comparator : function(model) {
+    return model.get("longUrl");
+  }
 });
 
