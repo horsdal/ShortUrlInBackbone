@@ -32,6 +32,10 @@
       urlModel.save({}, { success: function (model) { flag = true; savedModel = model; } });
     });
     
+    it("shouldbe accepted by the server", function (parameters) {
+      waitsFor(function () { return flag; }, "Server didn't succceed in saving model", 500);
+    });
+
     it("should not change the short url", function () {
       waitsFor(function () { return flag; }, "Server didn't succceed in saving model", 500);
       runs(function() {
