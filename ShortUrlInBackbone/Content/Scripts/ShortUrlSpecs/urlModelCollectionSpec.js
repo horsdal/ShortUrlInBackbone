@@ -31,12 +31,34 @@
   });
 
   describe("when made to fetch", function () {
-    it("should not be empty anymore", function () {
+    var flag;
 
+    beforeEach(function () {
+      flag = false;
+      runs(function () {
+        sut.fetch({ success: function () { flag = true; } });
+      });
+    });
+
+    it("should not be empty anymore", function () {
+      waitsFor(function () { return flag; }, 500);
+      runs(function () {
+        expect(sut.length).toBeGreaterThan(0);
+      });
     });
     
     it("it should be ordered alphabetically by long url", function () {
-
+      waitsFor(function () { return flag; }, 500);
+      runs(function () {
+        var previousModel = null;
+        sut.each(function (model) {
+          if (previousModel != null) {
+            if (model.get("longUrl") != previousModel.get("longUrl")))
+            expect(model.get("longUrl")).toBeGreaterThan(previousModel.get("longUrl"));
+          }
+          previousModel = model;
+        });
+      });
     });
   });
 });
