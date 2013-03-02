@@ -63,4 +63,20 @@
       });
     });
   });
+  
+  describe("when fetch fails", function () {
+    var flag;
+    var server;
+
+    beforeEach(function () {
+      server = sinon.fakeServer.create();
+      server.respondWith("GET", sut.url, [404, {}, ""]);
+
+        sut.fetch();
+    });
+
+    it("should still be empty", function () {
+        expect(sut.length).toEqual(0);
+    });
+  });
 });
