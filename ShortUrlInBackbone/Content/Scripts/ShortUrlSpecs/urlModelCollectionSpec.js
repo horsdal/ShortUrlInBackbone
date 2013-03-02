@@ -10,7 +10,18 @@
       expect(sut.length).toEqual(0);
     });
   });
-  
+
+  var expectSortedByLongurl = function (coll) {
+    var previousModel = null;
+    coll.each(function (model) {
+      if (previousModel != null) {
+        if (model.get("longUrl") != previousModel.get("longUrl"))
+          expect(model.get("longUrl")).toBeGreaterThan(previousModel.get("longUrl"));
+      }
+      previousModel = model;
+    });
+  };
+
   describe("when items are added", function () {
 
     beforeEach(function () {
@@ -24,9 +35,7 @@
     });
 
     it("it should be ordered alphabetically by long url", function () {
-      expect(sut.at(0).get("longUrl")).toEqual("a");
-      expect(sut.at(1).get("longUrl")).toEqual("b");
-      expect(sut.at(2).get("longUrl")).toEqual("c");
+      expectSortedByLongurl(sut);
     });
   });
 
@@ -46,18 +55,11 @@
         expect(sut.length).toBeGreaterThan(0);
       });
     });
-    
+
     it("it should be ordered alphabetically by long url", function () {
       waitsFor(function () { return flag; }, 500);
       runs(function () {
-        var previousModel = null;
-        sut.each(function (model) {
-          if (previousModel != null) {
-            if (model.get("longUrl") != previousModel.get("longUrl")))
-            expect(model.get("longUrl")).toBeGreaterThan(previousModel.get("longUrl"));
-          }
-          previousModel = model;
-        });
+        expectSortedByLongurl(sut);
       });
     });
   });
