@@ -32,4 +32,47 @@
       expect(button.text()).toEqual("Shorten!");
     });
   });
+  
+  describe("when the text field text is set and the shorten button is clicked", function () {
+    var server;
+    
+    beforeEach(function () {
+      server = sinon.fakeServer.create();
+      server.respondWith("GET", "/{whatever}", [200, {}, ""]);
+
+      sut.$el.find('input').val('www.blahblahblah.com');
+      sut.$el.find('button').trigger("click");
+    });
+    
+    it("should attempt to save a new item to the server", function () {
+      expect(server.requests.length).toEqual(1);
+      expect(server.requests[0].method).toEqual("POST");
+      expect(server.requests[0].url).toEqual((new ShortUrl.ShortenedUrlModel()).url());
+    });
+    
+    it("should attempt to save an item with json content type", function () {
+      expect(server.requests[0].requestHeaders["Content-Type"]).toContain("application/json");
+    });
+
+    it("should attempt to save an item with the long url from the input field", function () {
+      expect(JSON.parse(server.requests[0].requestBody).longUrl).toBeDefined();
+      expect(JSON.parse(server.requests[0].requestBody).longUrl).toEqual("www.blahblahblah.com");
+    });
+
+  });
+
+  describe("when the text field text is not set and the shorten button is clicked", function () {
+    var server;
+
+    beforeEach(function () {
+      server = sinon.fakeServer.create();
+      server.respondWith("GET", "/{whatever}", [200, {}, ""]);
+
+      sut.$el.find('button').trigger("click");
+    });
+
+    it("should not make any calls to the server", function () {
+      expect(server.requests.length).toEqual(0);
+    });
+  });
 });
