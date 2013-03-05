@@ -1,4 +1,10 @@
-﻿ShortUrl.MainFormView = Backbone.View.extend({
+﻿ShortUrl.mainformViewTemplate =
+  "<div class=\"input-append\"> \
+    <input id=\"longUrlTextInput\" type=\"text\" placeholder=\"Long URL\" class=\"span5\" /> \
+    <button class=\"btn\">Shorten!</button> \
+   </div>";
+
+ShortUrl.MainFormView = Backbone.View.extend({
   initialize: function() {
     this.render();
     
@@ -6,8 +12,7 @@
   },
   
   render: function () {
-    var template = $("#mainFormTemplate").html();
-    this.$el.html(template);
+    this.$el.html(ShortUrl.mainformViewTemplate);
     return this;
   },
   

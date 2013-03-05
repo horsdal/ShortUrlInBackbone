@@ -13,13 +13,6 @@
   <script src="/Content/Scripts/ShortUrl/urlListModel.js"></script>
   <script src="/Content/Scripts/ShortUrl/urlListView.js"></script>
   
-  <script id="mainFormTemplate" type="text/underscore">
-    <div class="input-append">
-      <input id="longUrlTextInput" type="text" placeholder="Long URL" class="span5" />
-      <button class="btn">Shorten!</button>
-     </div>
-  </script>
-
   <script id="urlListItemTemplate" type="text/underscore">
     <td><%=shortUrl%></td>
     <td><%=longUrl%></td>
@@ -28,9 +21,7 @@
   </script>
 
   <script>
-    $(function () {
-      ShortUrl.init();
-    })
+    $(ShortUrl.init);
   </script>
 </head>
   <body>
